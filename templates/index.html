@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Slide Generator</title>
+    <link rel="stylesheet" href="/static/style.css"> <!-- Link to the CSS file -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Ensure proper scaling on mobile devices -->
+</head>
+<body>
+    <div class="container">
+        <h1>AI Slide Generator</h1>
+        <form id="presentationForm">
+            <div class="form-group">
+                <label for="title">Presentation Title:</label>
+                <input type="text" name="title" id="title" placeholder="Enter presentation title" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="presenter">Presenter Name:</label>
+                <input type="text" name="presenter" id="presenter" placeholder="Enter presenter name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="num_slides">Number of Slides:</label>
+                <input type="number" name="num_slides" id="num_slides" placeholder="Enter number of slides" min="1" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="template_choice">Choose a Template:</label>
+                <select id="template_choice" name="template_choice" required>
+                    <option value="simple.pptx">Simple</option>
+                    <option value="bright_modern.pptx">Bright Modern</option>
+                    <option value="dark_modern.pptx">Dark Modern</option>
+                    <option value="marina.pptx">Marina</option>
+                    <option value="shift.pptx">Shift</option>
+                    <option value="geometric.pptx">Geometric</option>
+                    <option value="momentum.pptx">Momentum</option>
+                    <option value="focus.pptx">Focus</option>
+                    <option value="simple_dark.pptx">Simple Dark</option>
+                    <option value="tropic.pptx">Tropic</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="prompt">Presentation Prompt:</label>
+                <textarea name="prompt" id="prompt" placeholder="Enter your prompt here" required></textarea>
+            </div>
+            
+            <div class="form-group checkbox-group">
+                <input type="checkbox" name="include_references" id="include_references">
+                <label for="include_references">Include References</label>
+            </div>
+            
+            <div class="form-group checkbox-group">
+                <input type="checkbox" name="include_images" id="include_images">
+                <label for="include_images">Include Images</label>
+            </div>
+            
+            <button type="submit">Generate Presentation</button>
+        </form>
+    </div>
+    <div id="loader" class="loader" style="display: none;">
+        <div class="spinner"></div>
+        <p>Please wait...</p>
+    </div>
+    <footer>
+        <p>© 2024 Presentation Generator, Inc. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById('presentationForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            // Display the loader
+            document.getElementById('loader').style.display = 'flex';
+
+            // Collect form data
+            const formData = new FormData(this);
+
+            // Submit the form using fetch API
+            fetch('/generate-ppt', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.blob())
+            .then(blob => {
+                // Create a link element to download the file
+                const link = document.createElement('a');
+                link.href = window.URL.createObjectURL(blob);
+                link.download = 'presentation.pptx';
+                link.click();
+
+                // Hide the loader
+                document.getElementById('loader').style.display = 'none';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Hide the loader in case of error
+                document.getElementById('loader').style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html>
