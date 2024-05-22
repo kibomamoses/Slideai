@@ -2,7 +2,7 @@
 
 # AI Slide Generator
 
-A web application built with Flask that generates PowerPoint presentations using OpenAI's GPT-3 model and integrates images from Pexels.
+A web application built with Flask that generates PowerPoint presentations using OpenAI's GPT-3.5 model and integrate images from Pexels.
 
 ## Table of Contents
 
