@@ -1,8 +1,6 @@
-Certainly! Below is a template for a GitHub README.md file tailored to your Flask project:
 
----
 
-# Presentation Generator
+# AI Slide Generator
 
 A web application built with Flask that generates PowerPoint presentations using OpenAI's GPT-3 model and integrates images from Pexels.
 
