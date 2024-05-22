@@ -32,13 +32,13 @@ In addition to text-based slides, the application can optionally include images 
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your_username/presentation-generator.git
+   git clone https://github.com/kibomamoses/Slideai.git
    ```
 
 2. Navigate to the project directory:
 
    ```bash
-   cd presentation-generator
+   cd slideai
    ```
 
 3. Install dependencies:
